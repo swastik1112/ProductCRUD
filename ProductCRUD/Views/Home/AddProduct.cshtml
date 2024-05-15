@@ -1,0 +1,51 @@
+﻿<h1>Add Product</h1>
+
+<form asp-action="AddProduct" method="post" id="addProductForm">
+    <div>
+        <label for="productName">Product Name:</label>
+        <input type="text" id="productName" name="Name" required />
+        <div class="invalid-feedback">Please enter a valid product name.</div>
+    </div>
+    <div>
+        <label for="productPrice">Product Price:</label>
+        <input type="number" id="productPrice" name="Price" required />
+        <div class="invalid-feedback">Please enter a valid product price.</div>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Product</button>
+</form>
+
+<script>
+    // Client-side validation using jQuery Validation plugin
+    $(document).ready(function () {
+        $('#addProductForm').validate({
+            rules: {
+                Name: {
+                    required: true
+                },
+                Price: {
+                    required: true,
+                    number: true
+                }
+            },
+            messages: {
+                Name: "Please enter a valid product name.",
+                Price: {
+                    required: "Please enter a valid product price.",
+                    number: "Please enter a numeric value for the price."
+                }
+            },
+            errorPlacement: function (error, element) {
+                // Display error message below the input field
+                error.insertAfter(element);
+            },
+            highlight: function (element, errorClass) {
+                // Add Bootstrap error class to the input field
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element, errorClass) {
+                // Remove Bootstrap error class from the input field
+                $(element).removeClass('is-invalid');
+            }
+        });
+    });
+</script>

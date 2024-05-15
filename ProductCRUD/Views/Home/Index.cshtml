@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Product>
+@{
+    Layout = "_Layout";
+}
+<div>
+<h1>Products</h1>
+<a asp-controller="Home" asp-action="AddProduct" class="btn btn-primary">Add Product</a>
+</div>
+
+@foreach (var product in Model)
+{
+    <div>
+        <p>@product.Name - $@product.Price</p>
+        <a asp-controller="Home" asp-action="EditProduct" asp-route-id="@product.Id" class="btn btn-primary">Edit</a>
+        <button onclick="confirmDelete('@product.Id')" class="btn btn-danger">Delete</button>
+    </div>
+}
+
+
+
